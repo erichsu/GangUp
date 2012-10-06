@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ti:app xmlns:ti="http://ti.appcelerator.org">
+    <property name="acs-oauth-secret-production" type="string">iUk6xaaLm5naFnT8CnYZ7kp9MgTf6ZmG</property>
+    <property name="acs-oauth-key-production" type="string">fI42CkVp8cV8MNrUzUhDp5dFewNpLIPb</property>
+    <property name="acs-api-key-production" type="string">EmvBFBzfdLILRKqjOCcP9EUc9p2E79fQ</property>
+    <property name="acs-oauth-secret-development" type="string">V79b9oxcIDHtTrSmWX6UVunvmsOTcP8e</property>
+    <property name="acs-oauth-key-development" type="string">kbUEYzzm9pd8NbBGG8VTNshfnRg79Sfg</property>
+    <property name="acs-api-key-development" type="string">ZIlWllKgmtvleaBPIdL3uUVnAvYaRUG1</property>
+    <deployment-targets>
+        <target device="mobileweb">true</target>
+        <target device="iphone">true</target>
+        <target device="ipad">true</target>
+        <target device="android">false</target>
+        <target device="blackberry">false</target>
+    </deployment-targets>
+    <sdk-version>2.1.2.GA</sdk-version>
+    <id>com.gangup</id>
+    <name>GangUp</name>
+    <version>1.0</version>
+    <publisher>eric_hsu</publisher>
+    <url>http://</url>
+    <description>not specified</description>
+    <copyright>2012 by eric_hsu</copyright>
+    <icon>appicon.png</icon>
+    <persistent-wifi>false</persistent-wifi>
+    <prerendered-icon>false</prerendered-icon>
+    <statusbar-style>default</statusbar-style>
+    <statusbar-hidden>false</statusbar-hidden>
+    <fullscreen>false</fullscreen>
+    <navbar-hidden>false</navbar-hidden>
+    <analytics>true</analytics>
+    <guid>7f0ea7ec-6e69-4100-aaf7-4a36caae8178</guid>
+    <property name="ti.ui.defaultunit">system</property>
+    <iphone>
+        <orientations device="iphone">
+            <orientation>Ti.UI.PORTRAIT</orientation>
+        </orientations>
+        <orientations device="ipad">
+            <orientation>Ti.UI.PORTRAIT</orientation>
+            <orientation>Ti.UI.UPSIDE_PORTRAIT</orientation>
+            <orientation>Ti.UI.LANDSCAPE_LEFT</orientation>
+            <orientation>Ti.UI.LANDSCAPE_RIGHT</orientation>
+        </orientations>
+    </iphone>
+    <android xmlns:android="http://schemas.android.com/apk/res/android"/>
+    <mobileweb>
+        <precache/>
+        <splash>
+            <enabled>true</enabled>
+            <inline-css-images>true</inline-css-images>
+        </splash>
+        <theme>default</theme>
+    </mobileweb>
+    <modules>
+        <module platform="commonjs" version="2.3.0">ti.cloud</module>
+    </modules>
+</ti:app>
