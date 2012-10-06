@@ -40,132 +40,16 @@ if (Ti.version < 1.8 ) {
 			Window = require('ui/handheld/ApplicationWindow');
 		}
 	}
-	//new Window().open();
-	Ti.UI.setBackgroundColor('#000');
-	var winRoot = Ti.UI.createWindow({
-	  backgroundColor: 'black',
-	  exitOnClose: true,
-	  fullscreen: false,
-	  title: 'GangUp Demo'
-	});
-	var win1 = Titanium.UI.createWindow({
-	    backgroundColor: 'red',
-	    title: ''
-	});
-	var win3 = Titanium.UI.createWindow({
-	    	backgroundColor: 'blue',
-	    	title: 'Blue Window'
-	});
-	var nav = Titanium.UI.iPhone.createNavigationGroup({
-	   window: win1,
-	   height:height-43-20
-	});
-	
-	winRoot.open();
-	// generate random number, used to make each row appear distinct for this example
-	function randomInt(max){
-	  return Math.floor(Math.random() * max) + 1;
-	}
-	
-	var IMG_BASE = 'https://github.com/appcelerator/titanium_mobile/raw/master/demos/KitchenSink/Resources/images/';
-	var defaultFontSize = Ti.Platform.name === 'android' ? 16 : 14;
-	
-	var tableData = [];
-	
-	for (var i=1; i<=20; i++){
-	  var row = Ti.UI.createTableViewRow({
-	    className:'forumEvent', // used to improve table performance
-	    selectedBackgroundColor:'white',
-	    rowIndex:i, // custom property, useful for determining the row during events
-	    height:110
-	  });
-	  
-	  var imageAvatar = Ti.UI.createImageView({
-	    image: IMG_BASE + 'custom_tableview/user.png',
-	    left:10, top:5,
-	    width:50, height:50
-	  });
-	  row.add(imageAvatar);
-	  
-	  var labelUserName = Ti.UI.createLabel({
-	    color:'#576996',
-	    font:{fontFamily:'Arial', fontSize:defaultFontSize+6, fontWeight:'bold'},
-	    text:'Fred Smith ' + i,
-	    left:70, top: 6,
-	    width:200, height: 30
-	  });
-	  row.add(labelUserName);
-	  
-	  var labelDetails = Ti.UI.createLabel({
-	    color:'#222',
-	    font:{fontFamily:'Arial', fontSize:defaultFontSize+2, fontWeight:'normal'},
-	    text:'Replied to post with id ' + randomInt(1000) + '.',
-	    left:70, top:44,
-	    width:360
-	  });
-	  row.add(labelDetails);
-	  
-	  var imageCalendar = Ti.UI.createImageView({
-	    image:IMG_BASE + 'custom_tableview/eventsButton.png',
-	    left:70, bottom: 2,
-	    width:32, height: 32
-	  });
-	  row.add(imageCalendar);
-	  
-	  var labelDate = Ti.UI.createLabel({
-	    color:'#999',
-	    font:{fontFamily:'Arial', fontSize:defaultFontSize, fontWeight:'normal'},
-	    text:'on ' + randomInt(30) + ' Nov 2012',
-	    left:105, bottom:10,
-	    width:200, height:20
-	  });
-	  row.add(labelDate);
-	  //row.addEventListener('click',function(e){
-		//nav.open(win3, {animated:true});	
-	  //});
-	  
-	  tableData.push(row);
-	}
-	
-	var tableView = Ti.UI.createTableView({
-	  backgroundColor:'white',
-	  data:tableData//,
-	  //height:height-108,
-	  //top:43
-	});
-	var refresh = Titanium.UI.createButton({
-	    systemButton: Titanium.UI.iPhone.SystemButton.REFRESH,
-	});
-	
-	var add = Titanium.UI.createButton({
-	    systemButton: Titanium.UI.iPhone.SystemButton.ADD,
-	});
-	
-	var info = Titanium.UI.createButton({
-	    systemButton: Titanium.UI.iPhone.SystemButton.INFO_LIGHT
-	});
-	
-	flexSpace = Titanium.UI.createButton({
-	    systemButton:Titanium.UI.iPhone.SystemButton.FLEXIBLE_SPACE
-	});
-	
-	var toolbar = Titanium.UI.iOS.createToolbar({
-	    items:[refresh, flexSpace, add, flexSpace, info],
-	    bottom:0,
-	    borderTop:true,
-	    borderBottom:false
-	});
 
+	//This is the main window of the application
+	//var main = Ti.UI.createWindow();
+	//main.add(navGroup);
+	//main.add(toolbar);
 	
-
-	//win.open();
 	
-
-	win1.add(tableView); 
-	winRoot.add(toolbar);	
-	winRoot.add(nav);	
-	//winRoot.open();
-	//nav.open(win3, {animated:true});
+	 
+	//main.open();
+	new Window().open();
 })();
 
 
