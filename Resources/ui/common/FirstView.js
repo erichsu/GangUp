@@ -125,6 +125,16 @@ function FirstView() {
 	var add = Titanium.UI.createButton({
 	    systemButton: Titanium.UI.iPhone.SystemButton.ADD,
 	});
+	add.addEventListener('click', function(e){
+		var win = Ti.UI.createWindow({
+			modal:true,
+			navBarHidden:true
+		});
+		var AddingEventView = require('ui/common/AddingEventView');
+		var view = new AddingEventView();
+		win.add(view);
+		win.open();
+	});
 	
 	var info = Titanium.UI.createButton({
 	    systemButton: Titanium.UI.iPhone.SystemButton.INFO_LIGHT
