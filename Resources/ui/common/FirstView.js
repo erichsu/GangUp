@@ -59,6 +59,25 @@ function FirstView() {
 	notification.add(badge);
 	notification.addEventListener('click',function(e){
 		// TODO: add buble dialog
+		var winNotify = Ti.UI.createWindow({
+			bottom: 436
+		});
+		
+		var NotificationView = require('ui/common/NotificationView');
+		winNotify.add(new NotificationView(
+			Ti.UI.createImageView({
+			    image: IMG_BASE + 'custom_tableview/user.png',
+			    left:0, top:10,
+			    width:24, height:24
+			  }), 
+			Ti.UI.createLabel({
+				color:'#576996',
+			    font:{fontFamily:'Arial', fontSize:defaultFontSize+6},
+			    text:'Fred Smith',
+			    left:30, top: 6,
+			    width:200, height: 30
+			  })));
+		winNotify.open({bottom:0});
 	});
 	
 	titleBar.add(notification);
