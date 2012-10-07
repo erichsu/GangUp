@@ -107,33 +107,20 @@ function FirstView() {
 	  window:first,
 	  height:height-43-20
 	});
-	//Here's a window we want to push onto the stack...
-	var second = Ti.UI.createWindow({
-	  background:"#fff",
-	  title:"Child Window"
-	});
-	second.add(Ti.UI.createLabel({text:"Here's the child"}));
-	
+
 	//When the label on the first window receives a touch, open the second
 	tableView.addEventListener("click", function(e) {
-	  navGroup.open(second);
+		var DetailWindow = require('ui/common/DetailWindow');
+		var detailWindow = new DetailWindow();
+	  	navGroup.open(detailWindow);
 	});
+	
 	var refresh = Titanium.UI.createButton({
 	    systemButton: Titanium.UI.iPhone.SystemButton.REFRESH,
 	});
 	
 	var add = Titanium.UI.createButton({
 	    systemButton: Titanium.UI.iPhone.SystemButton.ADD,
-	});
-	add.addEventListener('click', function(e){
-		var win = Ti.UI.createWindow({
-			modal:true,
-			navBarHidden:true
-		});
-		var AddingEventView = require('ui/common/AddingEventView');
-		var view = new AddingEventView();
-		win.add(view);
-		win.open();
 	});
 	
 	var info = Titanium.UI.createButton({
