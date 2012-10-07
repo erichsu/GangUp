@@ -16,12 +16,13 @@ function FirstView() {
 	var titleBar = Ti.UI.createView({
 		width:width,
 	});
+	
 	var imageUserAvatar = Ti.UI.createImageView({
 	    image: IMG_BASE + 'custom_tableview/user.png',
 	    left:0, top:10,
 	    width:24, height:24
 	  });
-	titleBar.add(imageUserAvatar);
+	
 	var labelUserName = Ti.UI.createLabel({
 		color:'#576996',
 	    font:{fontFamily:'Arial', fontSize:defaultFontSize+6},
@@ -29,7 +30,41 @@ function FirstView() {
 	    left:30, top: 6,
 	    width:200, height: 30
 	  });
+	
+	var notification = Ti.UI.createView({
+		top: 0,
+		right: 0,
+		height: 40,
+		width: 32,
+		backgroundImage: 'iphone/ribbon.png'
+	});
+	
+	var badge = Ti.UI.createLabel({
+		text: "3",
+		textAlign: "center",
+		height: 16,
+		width: 16,
+		font: {
+		    fontWeight: "light",
+		    fontSize: 11
+		},
+		backgroundColor: "#790000",
+		borderColor: "white",
+		color: "white",
+		borderRadius: 7,
+		borderWidth: 1.5,
+		top: 1,
+		left: 2
+	});
+	notification.add(badge);
+	notification.addEventListener('click',function(e){
+		// TODO: add buble dialog
+	});
+	
+	titleBar.add(notification);
+	titleBar.add(imageUserAvatar);
 	titleBar.add(labelUserName);
+	
 	titleBar.backgroundColor = 'gray';
 	first.titleControl = titleBar;
 	// generate random number, used to make each row appear distinct for this example
@@ -39,7 +74,7 @@ function FirstView() {
 	
 	var tableData = [];
 	
-	for (var i=1; i<=20; i++){
+	for (var i=1; i<=10; i++){
 	  var row = Ti.UI.createTableViewRow({
 	    className:'forumEvent', // used to improve table performance
 	    selectedBackgroundColor:'white',
@@ -57,7 +92,7 @@ function FirstView() {
 	  var labelEventName = Ti.UI.createLabel({
 	    color:'#576996',
 	    font:{fontFamily:'Arial', fontSize:defaultFontSize+6, fontWeight:'bold'},
-	    text:'Fred Smith ' + i,
+	    text:'Event ' + i,
 	    left:70, top: 6,
 	    width:200, height: 30
 	  });
@@ -122,6 +157,16 @@ function FirstView() {
 	var add = Titanium.UI.createButton({
 	    systemButton: Titanium.UI.iPhone.SystemButton.ADD,
 	});
+	add.addEventListener('click', function(e){
+		var win = Ti.UI.createWindow({
+			modal:true,
+			navBarHidden:true
+		});
+		var AddingEventView = require('ui/common/AddingEventView');
+		var view = new AddingEventView();
+		win.add(view);
+		win.open();
+	});
 	
 	var info = Titanium.UI.createButton({
 	    systemButton: Titanium.UI.iPhone.SystemButton.INFO_LIGHT
@@ -130,6 +175,8 @@ function FirstView() {
 	flexSpace = Titanium.UI.createButton({
 	    systemButton:Titanium.UI.iPhone.SystemButton.FLEXIBLE_SPACE
 	});
+	
+
 	
 	var toolbar = Titanium.UI.iOS.createToolbar({
 	    items:[refresh, flexSpace, add, flexSpace, info],

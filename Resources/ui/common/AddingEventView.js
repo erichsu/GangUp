@@ -17,7 +17,6 @@ function AddingEventView() {
 		selectedBackgroundColor:'white',
 		rowIndex:1, // custom property, useful for determining the row during events
 		selectionStyle:Ti.UI.iPhone.TableViewCellSelectionStyle.NONE
-		// height:110
 	});
 	title.add(Ti.UI.createTextField({
 		left:10,
