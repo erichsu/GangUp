@@ -20,14 +20,22 @@ function NotificationView(imageUserAvatar, labelUserName) {
 	
 	var tableView = Ti.UI.createTableView({
 		top: 0,
-		height: '90%'
+		height: '90%',
+		data: [Ti.UI.createTableViewRow()]
+	});
+	tableView.addEventListener('click', function(e){
+		var ReadInvitationView = require('ui/common/ReadInvitationView');
+		var win = Ti.UI.createWindow();
+		win.add(new ReadInvitationView());
+		win.navGroup = navGroup;
+		navGroup.open(win);
 	});
 	
 	var ribbon = Ti.UI.createImageView({
 		width: 32,
 		height: 40,
 		image: 'iphone/ribbon.png',
-		bottom: 15,
+		bottom: 10,
 		right: 5
 	})
 	ribbon.addEventListener('click', function(e){

@@ -90,7 +90,7 @@ function AddingEventView() {
 	  	default:
 	  	break;
 	  }
-	};
+	}
 	
 	var tableView = Ti.UI.createTableView({
 		style: Ti.UI.iPhone.TableViewStyle.GROUPED,

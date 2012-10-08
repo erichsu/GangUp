@@ -19,7 +19,7 @@ function FirstView() {
 	
 	var imageUserAvatar = Ti.UI.createImageView({
 	    image: IMG_BASE + 'custom_tableview/user.png',
-	    left:0, top:10,
+	    left:15, top:10,
 	    width:24, height:24
 	  });
 	
@@ -27,7 +27,7 @@ function FirstView() {
 		color:'#576996',
 	    font:{fontFamily:'Arial', fontSize:defaultFontSize+6},
 	    text:'Fred Smith',
-	    left:30, top: 6,
+	    left:45, top: 6,
 	    width:200, height: 30
 	  });
 	
@@ -58,7 +58,6 @@ function FirstView() {
 	});
 	notification.add(badge);
 	notification.addEventListener('click',function(e){
-		// TODO: add buble dialog
 		var winNotify = Ti.UI.createWindow({
 			bottom: 436
 		});
@@ -150,9 +149,11 @@ function FirstView() {
 	
 	var tableView = Ti.UI.createTableView({
 	  backgroundColor:'white',
-	  data:tableData//,
+	  data:tableData,
 	  //height:height-108,
 	  //top:43
+	  height: '80%',
+	  width: '80%'
 	});
 	first.add(tableView);
 	
