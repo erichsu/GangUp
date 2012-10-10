@@ -1,8 +1,9 @@
 function DetailWindow() {
 	
 	var self = Ti.UI.createWindow({
-		backgroundColor:'#ffffff',
-		title:"Details"
+		title:"Details",
+		barImage: 'iphone/titlebar.png',
+		barColor: '#4d2c14'
 	});
 	
 	var tableData = [];

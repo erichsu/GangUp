@@ -9,22 +9,27 @@ function FirstView() {
 	var IMG_BASE = 'https://github.com/appcelerator/titanium_mobile/raw/master/demos/KitchenSink/Resources/images/';
 	var defaultFontSize = Ti.Platform.name === 'android' ? 16 : 14;
 	var first = Ti.UI.createWindow({
-	  backgroundColor:"#fff",
+	  // backgroundColor:"#f00",
 	  title:"Gang Up",
+	  backgroundImage:'iphone/firstview.png',
+	  // titleImage: 'iphone/layout1_hor.png',
+	  barImage: 'iphone/titlebar.png',
+	  // translucent: true
 	});
 	 
 	var titleBar = Ti.UI.createView({
 		width:width,
+		opacity:0.4
 	});
 	
 	var imageUserAvatar = Ti.UI.createImageView({
 	    image: IMG_BASE + 'custom_tableview/user.png',
-	    left:15, top:10,
-	    width:24, height:24
+	    left:15, top:11,
+	    width:23, height:23
 	  });
 	
 	var labelUserName = Ti.UI.createLabel({
-		color:'#576996',
+		color:'#fff',
 	    font:{fontFamily:'Arial', fontSize:defaultFontSize+6},
 	    text:'Fred Smith',
 	    left:45, top: 6,
@@ -66,11 +71,11 @@ function FirstView() {
 		winNotify.add(new NotificationView(
 			Ti.UI.createImageView({
 			    image: IMG_BASE + 'custom_tableview/user.png',
-			    left:0, top:10,
-			    width:24, height:24
+			    left:0, top:11,
+			    width:23, height:23
 			  }), 
 			Ti.UI.createLabel({
-				color:'#576996',
+				color:'white',
 			    font:{fontFamily:'Arial', fontSize:defaultFontSize+6},
 			    text:'Fred Smith',
 			    left:30, top: 6,
@@ -83,8 +88,9 @@ function FirstView() {
 	titleBar.add(imageUserAvatar);
 	titleBar.add(labelUserName);
 	
-	titleBar.backgroundColor = 'gray';
+	// titleBar.backgroundColor = 'gray';
 	first.titleControl = titleBar;
+	// first.barImage = 'https://dl.dropbox.com/u/5683013/layout1_hor.png';
 	// generate random number, used to make each row appear distinct for this example
 	function randomInt(max){
 	  return Math.floor(Math.random() * max) + 1;
@@ -150,17 +156,16 @@ function FirstView() {
 	var tableView = Ti.UI.createTableView({
 	  backgroundColor:'white',
 	  data:tableData,
-	  //height:height-108,
-	  //top:43
-	  height: '80%',
-	  width: '80%'
+	  top: 10,
+	  height: '85%',
+	  width: '85%'
 	});
 	first.add(tableView);
 	
 	//Here's the nav group that will hold them both...
 	var navGroup = Ti.UI.iPhone.createNavigationGroup({
 	  window:first,
-	  height:height-43-20
+	  // height:height-43-20
 	});
 
 	//When the label on the first window receives a touch, open the second
@@ -171,12 +176,19 @@ function FirstView() {
 	});
 	
 	var refresh = Titanium.UI.createButton({
-	    systemButton: Titanium.UI.iPhone.SystemButton.REFRESH,
+		style: Ti.UI.iPhone.SystemButtonStyle.PLAIN,
+		width: 20,
+		height: 20,
+		left: '5%',
+		image: 'iphone/refresh.png'
 	});
 	
-	var add = Titanium.UI.createButton({
-	    systemButton: Titanium.UI.iPhone.SystemButton.ADD,
-	});
+	var add = Ti.UI.createButton({
+		style: Ti.UI.iPhone.SystemButtonStyle.PLAIN,
+		width: 26,
+		height: 26,
+		image: 'iphone/add.png'
+	})
 	add.addEventListener('click', function(e){
 		var win = Ti.UI.createWindow({
 			modal:true,
@@ -189,23 +201,27 @@ function FirstView() {
 	});
 	
 	var info = Titanium.UI.createButton({
-	    systemButton: Titanium.UI.iPhone.SystemButton.INFO_LIGHT
+		style: Ti.UI.iPhone.SystemButtonStyle.PLAIN,
+		width: 20,
+		height: 20,
+		right: '5%',
+		image: 'iphone/gear.png'
 	});
 	
 	flexSpace = Titanium.UI.createButton({
 	    systemButton:Titanium.UI.iPhone.SystemButton.FLEXIBLE_SPACE
 	});
+		
+	var toolbar = Ti.UI.createView({
+		bottom:0,
+		height: 38,
+		backgroundImage: 'iphone/toolbar.png',
+	});
+	toolbar.add(refresh, add, info);
 	
-
+	first.add(toolbar);
 	
-	var toolbar = Titanium.UI.iOS.createToolbar({
-	    items:[refresh, flexSpace, add, flexSpace, info],
-	    bottom:0,
-	    borderTop:true,
-	    borderBottom:false
-	});	
 	self.add(navGroup);
-	self.add(toolbar);
 	return self;
 }
 

@@ -8,7 +8,9 @@ function NotificationView(imageUserAvatar, labelUserName) {
 		backgroundColor: 'black'
 	});
 	
-	var winRoot = Ti.UI.createWindow();
+	var winRoot = Ti.UI.createWindow({
+		barImage: 'iphone/titlebar.png'
+	});
 	
 	var navGroup = Ti.UI.iPhone.createNavigationGroup({
 		window: winRoot

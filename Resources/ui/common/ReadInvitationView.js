@@ -1,7 +1,10 @@
 //ReadInvitationView Component Constructor
 function ReadInvitationView() {
 	//create object instance, a parasitic subclass of Observable
-	var self = Ti.UI.createView();
+	var self = Ti.UI.createView({
+		barColor: '#4d2c14',
+		barImage: 'iphone/titlebar.png'
+	});
 	
 	var title = Ti.UI.createTableViewRow({
 		className:'forumEvent', // used to improve table performance

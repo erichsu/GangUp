@@ -5,7 +5,10 @@ function AddingEventView() {
 		backgroundColor:'#fff'
 	});
 	
-	var winRoot = Ti.UI.createWindow();
+	var winRoot = Ti.UI.createWindow({
+		barImage: 'iphone/titlebar.png',
+		barColor: '#4d2c14'
+	});
 	
 	var navGroup = Ti.UI.iPhone.createNavigationGroup({
 		window: winRoot
@@ -100,7 +103,11 @@ function AddingEventView() {
 	winRoot.add(tableView);
 	
 	var cancel = Ti.UI.createButton({
-		systemButton:Ti.UI.iPhone.SystemButton.CANCEL
+		systemButton: Ti.UI.iPhone.SystemButton.CANCEL,
+		// backgroundFocusedColor: 'red',
+		// backgroundColor:'yellow',
+		// backgroundDisabledColor: 'white',
+		// backgroundSelectedColor: 'green'
 	});
 	cancel.addEventListener('click', function(e){
 		self.parent.close();
@@ -108,9 +115,9 @@ function AddingEventView() {
 	winRoot.setLeftNavButton(cancel);
 	
 	var done = Ti.UI.createButton({
-		systemButton:Ti.UI.iPhone.SystemButton.DONE,
-		enabled: false
-	});
+		systemButton: Ti.UI.iPhone.SystemButton.DONE,
+		
+	})
 	winRoot.setRightNavButton(done);
 	// done.addEventListener
 
