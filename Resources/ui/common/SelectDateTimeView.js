@@ -1,10 +1,7 @@
 //SelecDateTimeView Component Constructor
 function SelecDateTimeView() {
 	//create object instance, a parasitic subclass of Observable
-	var self = Ti.UI.createView({
-		barColor: '#4d2c14',
-		barImage: 'iphone/titlebar.png'
-	});
+	var self = Ti.UI.createView();
 	
 	var rowStartTime = Ti.UI.createTableViewRow({
 		title: 'Start Time',

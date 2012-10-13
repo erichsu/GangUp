@@ -1,10 +1,7 @@
 //SelectLocationView Component Constructor
 function SelectLocationView() {
 	//create object instance, a parasitic subclass of Observable
-	var self = Ti.UI.createView({
-		barColor: '#4d2c14',
-		barImage: 'iphone/titlebar.png'
-	});
+	var self = Ti.UI.createView();
 	
 	var search = Titanium.UI.createSearchBar({
 	    barColor:'#000', 

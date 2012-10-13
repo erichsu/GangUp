@@ -5,10 +5,8 @@ function AddingEventView() {
 		backgroundColor:'#fff'
 	});
 	
-	var winRoot = Ti.UI.createWindow({
-		barImage: 'iphone/titlebar.png',
-		barColor: '#4d2c14'
-	});
+	var CustomTitleWindow = require('ui/common/CustomTitleWindow');
+	var winRoot = new CustomTitleWindow();
 	
 	var navGroup = Ti.UI.iPhone.createNavigationGroup({
 		window: winRoot
@@ -36,8 +34,9 @@ function AddingEventView() {
 		// height:110
 	});
 	location.addEventListener('click', function(e){
+		var CustomTitleWindow = require('ui/common/CustomTitleWindow');
+		var win = new CustomTitleWindow();
 		var SelectLocationView = require('ui/common/SelectLocationView');
-		var win = Ti.UI.createWindow();
 		win.add(new SelectLocationView());
 		navGroup.open(win);
 	});
@@ -50,8 +49,9 @@ function AddingEventView() {
 		// height:110
 	});
 	datetime.addEventListener('click', function(e){
+		var CustomTitleWindow = require('ui/common/CustomTitleWindow');
+		var win = new CustomTitleWindow();
 		var SelectDateTimeView = require('ui/common/SelectDateTimeView');
-		var win = Ti.UI.createWindow();
 		win.add(new SelectDateTimeView());
 		navGroup.open(win);
 	});

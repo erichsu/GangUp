@@ -1,10 +1,7 @@
 //ReadInvitationView Component Constructor
 function ReadInvitationView() {
 	//create object instance, a parasitic subclass of Observable
-	var self = Ti.UI.createView({
-		barColor: '#4d2c14',
-		barImage: 'iphone/titlebar.png'
-	});
+	var self = Ti.UI.createView();
 	
 	var title = Ti.UI.createTableViewRow({
 		className:'forumEvent', // used to improve table performance
@@ -22,9 +19,10 @@ function ReadInvitationView() {
 		title:L('event_location')
 	});
 	location.addEventListener('click', function(e){
-		var SelectLocationView = require('ui/common/SelectLocationView');
-		var win = Ti.UI.createWindow();
-		win.add(new SelectLocationView());
+		var CustomTitleWindow = require('ui/common/CustomTitleWindow');
+		var win = new CustomTitleWindow();
+		// var SelectLocationView = require('ui/common/SelectLocationView');
+		// win.add(new SelectLocationView());
 		self.parent.navGroup.open(win);
 	});
 	
@@ -69,7 +67,8 @@ function ReadInvitationView() {
 	
 	var toolBar = Ti.UI.iOS.createToolbar({
 		items: [rejectButton, flexSpace, acceptButton, flexSpace],
-		bottom: '10%'
+		bottom: '10%',
+		barColor: '#4d2c14'
 	});
 	
 	self.add(tableView);

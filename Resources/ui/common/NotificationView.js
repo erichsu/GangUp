@@ -8,9 +8,8 @@ function NotificationView(imageUserAvatar, labelUserName) {
 		backgroundColor: 'black'
 	});
 	
-	var winRoot = Ti.UI.createWindow({
-		barImage: 'iphone/titlebar.png'
-	});
+	var CustomTitleWindow = require('ui/common/CustomTitleWindow');
+	var winRoot = new CustomTitleWindow();
 	
 	var navGroup = Ti.UI.iPhone.createNavigationGroup({
 		window: winRoot
@@ -26,8 +25,9 @@ function NotificationView(imageUserAvatar, labelUserName) {
 		data: [Ti.UI.createTableViewRow()]
 	});
 	tableView.addEventListener('click', function(e){
+		var CustomTitleWindow = require('ui/common/CustomTitleWindow');
+		var win = new CustomTitleWindow();
 		var ReadInvitationView = require('ui/common/ReadInvitationView');
-		var win = Ti.UI.createWindow();
 		win.add(new ReadInvitationView());
 		win.navGroup = navGroup;
 		navGroup.open(win);

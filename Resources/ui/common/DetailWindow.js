@@ -1,9 +1,7 @@
 function DetailWindow() {
-	
-	var self = Ti.UI.createWindow({
-		title:"Details",
-		barImage: 'iphone/titlebar.png',
-		barColor: '#4d2c14'
+	var CustomTitleWindow = require('ui/common/CustomTitleWindow');
+	var self = new CustomTitleWindow({
+		title:"Details"
 	});
 	
 	var tableData = [];
