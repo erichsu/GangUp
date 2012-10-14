@@ -56,6 +56,20 @@ function AddingEventView() {
 		navGroup.open(win);
 	});
 	
+	var attendee = Ti.UI.createTableViewRow({
+		className: 'forumEvent',
+		selectedBackgroundColor: 'white',
+		rowIndex: 2,
+		title: 'Attendee'
+	});
+	attendee.addEventListener('click', function(e){
+		Ti.Contacts.showContacts({
+			cancel: function(){},
+			selectedPerson: function(){},
+			selectedProperty: function(){}
+		});
+	});
+	
 	var description = Ti.UI.createTableViewRow({
 		className:'forumEvent', // used to improve table performance
 		selectedBackgroundColor:'white',
@@ -84,6 +98,7 @@ function AddingEventView() {
 	  	
 	  	case 1:
 	  	sections[i].add(datetime);
+	  	sections[i].add(attendee);
 	  	break;
 	  	
 	  	case 2:

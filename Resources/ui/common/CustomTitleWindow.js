@@ -4,5 +4,4 @@ function CustomTitleWindow(opts) {
 	win.setBarImage('iphone/titlebar.png');
 	return win;
 }
-
 module.exports = CustomTitleWindow;

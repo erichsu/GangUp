@@ -1,4 +1,3 @@
-//FirstView Component Constructor
 function FirstView() {
 	//create object instance, a parasitic subclass of Observable
 	var self = Ti.UI.createView();
@@ -18,16 +17,15 @@ function FirstView() {
 	var FirstViewTitleBar = require('ui/common/FirstViewTitleBar');
 	titleBar = FirstViewTitleBar.createCustomTitleBar();
 	first.titleControl = titleBar;
-	// generate random number, used to make each row appear distinct for this example
-	function randomInt(max) {
-		return Math.floor(Math.random() * max) + 1;
-	}
+	
+	var navGroup = Ti.UI.iPhone.createNavigationGroup({
+		window : first
+	});
 	
 	var CustomTableRow1 = require('ui/common/CustomTableRow1');
 	var topRow = new CustomTableRow1();
 
 	var tableData = [];
-
 	for (var i = 1; i <= 10; i++) {
 		var row = Ti.UI.createTableViewRow({
 			className : 'forumEvent', // used to improve table performance
@@ -125,19 +123,11 @@ function FirstView() {
 		height : '79%',
 		width : '95%'
 	});
-	first.add(tableView);
-
-	//Here's the nav group that will hold them both...
-	var navGroup = Ti.UI.iPhone.createNavigationGroup({
-		window : first
-	});
-
-	//When the label on the first window receives a touch, open the second
 	tableView.addEventListener("click", function(e) {
 		var DetailWindow = require('ui/common/DetailWindow');
-		var detailWindow = new DetailWindow();
-		navGroup.open(detailWindow);
+		navGroup.open(new DetailWindow());
 	});
+	first.add(tableView);
 
 	var refresh = Titanium.UI.createButton({
 		style : Ti.UI.iPhone.SystemButtonStyle.PLAIN,
@@ -192,6 +182,11 @@ function FirstView() {
 
 	self.add(navGroup);
 	return self;
+}
+
+// generate random number, used to make each row appear distinct for this example
+function randomInt(max) {
+	return Math.floor(Math.random() * max) + 1;
 }
 
 module.exports = FirstView;
