@@ -31,18 +31,26 @@ function FirstView() {
 	for (var i = 1; i <= 10; i++) {
 		var row = Ti.UI.createTableViewRow({
 			className : 'forumEvent', // used to improve table performance
-			backgroundColor: 'white',
-			selectedBackgroundColor : 'white',
+			// selectedBackgroundColor : 'white',
 			rowIndex : i, // custom property, useful for determining the row during events
-			height : 110
+			height : 60
 		});
+		
+		var imageBackground = Ti.UI.createView({
+			backgroundImage: 'iphone/notePaperRow.png',
+			left: 0,
+			height: 60
+		});
+		row.add(imageBackground);
 
 		var imageAvatar = Ti.UI.createImageView({
 			image : IMG_BASE + 'custom_tableview/user.png',
-			left : 10,
-			top : 5,
-			width : 50,
-			height : 50
+			right : 15,
+			top : 7,
+			width : 47,
+			height : 47,
+			borderWidth: 4,
+			borderColor: 'white'
 		});
 		row.add(imageAvatar);
 
@@ -54,7 +62,7 @@ function FirstView() {
 				fontWeight : 'bold'
 			},
 			text : 'Event ' + i,
-			left : 70,
+			left : 30,
 			top : 6,
 			width : 200,
 			height : 30,
@@ -62,28 +70,19 @@ function FirstView() {
 		});
 		row.add(labelEventName);
 
-		var labelDetails = Ti.UI.createLabel({
+		var labelHost = Ti.UI.createLabel({
 			color : '#222',
 			font : {
 				fontFamily : 'Arial',
-				fontSize : defaultFontSize + 2,
+				fontSize : 11,
 				fontWeight : 'normal'
 			},
-			text : 'Replied to post with id ' + randomInt(1000) + '.',
-			left : 70,
-			top : 44,
+			text : 'Hosted by Reed Yeh',
+			left : 30,
+			top : 30,
 			width : 360
 		});
-		row.add(labelDetails);
-
-		var imageCalendar = Ti.UI.createImageView({
-			image : IMG_BASE + 'custom_tableview/eventsButton.png',
-			left : 70,
-			bottom : 2,
-			width : 32,
-			height : 32
-		});
-		row.add(imageCalendar);
+		row.add(labelHost);
 
 		var labelDate = Ti.UI.createLabel({
 			color : '#999',
@@ -92,16 +91,13 @@ function FirstView() {
 				fontSize : defaultFontSize,
 				fontWeight : 'normal'
 			},
-			text : 'on ' + randomInt(30) + ' Nov 2012',
-			left : 105,
-			bottom : 10,
+			text : '24 Nov 2012',
+			left : 30,
+			bottom : 0,
 			width : 200,
 			height : 20
 		});
 		row.add(labelDate);
-		//row.addEventListener('click',function(e){
-		//nav.open(win3, {animated:true});
-		//});
 
 		tableData.push(row);
 	}
@@ -113,12 +109,17 @@ function FirstView() {
 	var secondSection = Ti.UI.createTableViewSection({
 		rows : tableData
 	});
+	
+	var lastSection = Ti.UI.createTableViewSection({
+		rows : [Ti.UI.createTableViewRow({
+			height: 26,
+			children: [Ti.UI.createView({left:2, width:298, height:26, backgroundImage: 'iphone/paperCutEdge_w_bg.png'})]
+		})]
+	});
 
 	var tableView = Ti.UI.createTableView({
-		// backgroundColor:'white',
 		backgroundColor : 'transparent',
-		// backgroundImage : 'iphone/notePaper.png',
-		data : [firstSection, secondSection],
+		data : [firstSection, secondSection, lastSection],
 		separatorColor : 'transparent',
 		top : 54,
 		height : '79%',
@@ -143,14 +144,16 @@ function FirstView() {
 		width : 20,
 		height : 20,
 		left : '5%',
-		image : 'iphone/refresh.png'
+		image : 'iphone/refresh.png',
+		backgroundSelectedColor: 'white'
 	});
 
 	var add = Ti.UI.createButton({
 		style : Ti.UI.iPhone.SystemButtonStyle.PLAIN,
 		width : 26,
 		height : 26,
-		image : 'iphone/add.png'
+		image : 'iphone/add.png',
+		backgroundSelectedColor: 'white'
 	})
 	add.addEventListener('click', function(e) {
 		var CustomTitleWindow = require('ui/common/CustomTitleWindow');
@@ -169,8 +172,10 @@ function FirstView() {
 		width : 20,
 		height : 20,
 		right : '5%',
-		image : 'iphone/gear.png'
+		image : 'iphone/gear.png',
+		backgroundSelectedColor: 'white'
 	});
+	
 
 	flexSpace = Titanium.UI.createButton({
 		systemButton : Titanium.UI.iPhone.SystemButton.FLEXIBLE_SPACE
