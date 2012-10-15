@@ -10,7 +10,9 @@ function ApplicationWindow() {
 		
 	//construct UI
 	var firstView = new FirstView();
-	self.add(firstView);
+	// self.add(firstView);
+
+	self.add(new (require('ui/common/LoginWindow'))());
 	
 	return self;
 }
