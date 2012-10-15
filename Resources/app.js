@@ -27,10 +27,10 @@ if (Ti.version < 1.8 ) {
 	var isTablet = osname === 'ipad' || (osname === 'android' && (width > 899 || height > 899));
 	
 	var Window;
-	if (isTablet) {
-		Window = require('ui/tablet/ApplicationWindow');
-	}
-	else {
+	// if (isTablet) {
+		// Window = require('ui/tablet/ApplicationWindow');
+	// }
+	// else {
 		// Android uses platform-specific properties to create windows.
 		// All other platforms follow a similar UI pattern.
 		if (osname === 'android') {
@@ -39,7 +39,7 @@ if (Ti.version < 1.8 ) {
 		else {
 			Window = require('ui/handheld/ApplicationWindow');
 		}
-	}
+	// }
 
 	//This is the main window of the application
 	//var main = Ti.UI.createWindow();
