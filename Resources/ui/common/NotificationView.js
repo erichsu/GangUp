@@ -22,7 +22,9 @@ function NotificationView(imageUserAvatar, labelUserName) {
 	var tableView = Ti.UI.createTableView({
 		top: 0,
 		height: '90%',
-		data: [Ti.UI.createTableViewRow({title: 'Go EngCamp\'12!!', rightImage: 'iphone/host_small.jpg'})]
+		data: [Ti.UI.createTableViewRow({
+			title: '007! Skyfall~', rightImage: 'iphone/host_small.jpg'
+		})]
 	});
 	tableView.addEventListener('click', function(e){
 		var CustomTitleWindow = require('ui/common/CustomTitleWindow');

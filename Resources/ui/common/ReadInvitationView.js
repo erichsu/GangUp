@@ -3,22 +3,61 @@ function ReadInvitationView() {
 	//create object instance, a parasitic subclass of Observable
 	var self = Ti.UI.createView();
 	
-	var title = Ti.UI.createTableViewRow({
-		className:'forumEvent', // used to improve table performance
-		selectedBackgroundColor:'white',
-		// rowIndex:1, // custom property, useful for determining the row during events
-		selectionStyle:Ti.UI.iPhone.TableViewCellSelectionStyle.NONE,
-		title: L('event_title')
+	var titleLabel = Ti.UI.createLabel({
+		text: '007! Skyfall~',
+		font: {fontSize: 25, fontWeight: 'bold'},
+		left: 10, top: 5
 	});
+	var hostLabel = Ti.UI.createLabel({
+		text: 'Hosted by Roy',
+		color: '#576996',
+		font: {fontSize: 12},
+		left: 10, top: 30,
+	});
+	
+	var locationLabel = Ti.UI.createLabel({
+		text: 'Taipei Miramar Cinemas',
+		font: {fontSize: 16},
+		left: 10, top: 5,
+	});
+	var locationDetailLabel = Ti.UI.createLabel({
+		text:'6F., No.22, Jingye 3rd Rd., Zhongshan Dist., Taipei City',
+		color: '#576996',
+		font: {fontSize: 12},
+		left: 10, top: 30,
+		width: '80%'
+	});
+	
+	var dateLabel = Ti.UI.createLabel({
+		text: 'Sun, Oct 28',
+		font: {fontSize: 12},
+		right: 10, top: 5,
+	});
+	var timeLabel = Ti.UI.createLabel({
+		text: '4:00 PM',
+		font: {fontSize: 16},
+		left: 10, top: 5,
+	});
+	
+	var titleRow = Ti.UI.createTableViewRow({
+		className:'forumEvent',
+		selectedBackgroundColor:'white',
+		selectionStyle:Ti.UI.iPhone.TableViewCellSelectionStyle.NONE,
+		// borderColor: 'transparent'
+	});
+	titleRow.add([titleLabel, hostLabel]);
+	
 	// TODO:get the title from FB event
 	
-	var location = Ti.UI.createTableViewRow({
+	var locationRow = Ti.UI.createTableViewRow({
 		className:'forumEvent', // used to improve table performance
 		selectedBackgroundColor:'white',
+		// borderColor: 'transparent'
 		// rowIndex:1, // custom property, useful for determining the row during events
-		title:L('event_location')
+		// title:L('event_location')
 	});
-	location.addEventListener('click', function(e){
+	locationRow.add([locationLabel, locationDetailLabel]);
+	locationRow.addEventListener('click', function(e){
 		var CustomTitleWindow = require('ui/common/CustomTitleWindow');
 		var win = new CustomTitleWindow();
 		// var SelectLocationView = require('ui/common/SelectLocationView');
@@ -26,12 +65,13 @@ function ReadInvitationView() {
 		self.parent.navGroup.open(win);
 	});
 	
-	var datetime = Ti.UI.createTableViewRow({
+	var datetimeRow = Ti.UI.createTableViewRow({
 		className:'forumEvent', // used to improve table performance
 		selectedBackgroundColor:'white',
 		// rowIndex:1, // custom property, useful for determining the row during events
-		title:L('event_datetime')
+		// title:L('event_datetime')
 	});
+	datetimeRow.add([dateLabel, timeLabel]);
 	
 	var description = Ti.UI.createTableViewRow({
 		className:'forumEvent', // used to improve table performance
@@ -47,13 +87,18 @@ function ReadInvitationView() {
 		top: 0,
 		style: Ti.UI.iPhone.TableViewStyle.GROUPED,
 		height: '90%',
-		data: [title, location, datetime, description]
+		data: [titleRow, locationRow, datetimeRow, description]
 	});
 	
 	// Toolbar
 	var acceptButton = Ti.UI.createButton({
 		title: 'Accept',
 		style: Ti.UI.iPhone.SystemButtonStyle.DONE
+	});
+	acceptButton.addEventListener('click', function(e){
+		self.parent.navGroup.parent.parent.close({
+			bottom:436
+		});
 	});
 	
 	var rejectButton = Ti.UI.createButton({
@@ -66,7 +111,7 @@ function ReadInvitationView() {
 	});
 	
 	var toolBar = Ti.UI.iOS.createToolbar({
-		items: [rejectButton, flexSpace, acceptButton, flexSpace],
+		items: [rejectButton, flexSpace, acceptButton],
 		bottom: '10%',
 		barColor: '#4d2c14'
 	});
