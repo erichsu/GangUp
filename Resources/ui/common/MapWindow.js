@@ -1,35 +1,11 @@
 function MapWindow() {
 	var CustomTitleWindow = require('ui/common/CustomTitleWindow');
 	var self = new CustomTitleWindow({
-		// title:"Map"
 	});
 	
-	// var detailButton = Ti.UI.createButton({
-		// image: 'iphone/list-view.png'
+	// var titleControl = Ti.UI.iOS.createToolbar({
+		// // items: []
 	// });
-	// detailButton.addEventListener('click', function(e){
-		// self.close();
-	// });
-	// self.setRightNavButton(detailButton);
-	
-	var buttonBar = Ti.UI.createButtonBar({
-		labels: ['Friends', 'Chat'],
-		style:Titanium.UI.iPhone.SystemButtonStyle.BAR,
-		backgroundColor: '#4d2c14',
-		width: '200'
-	});
-	// self.setTitleControl(buttonBar);
-	self.setRightNavButton(buttonBar);
-	
-	
-	
-	// var win = Ti.UI.createWindow({
-		// ti
-	// })
-	
-	var titleControl = Ti.UI.iOS.createToolbar({
-		// items: []
-	});
 	
 	var tableData = [];
 	var IMG_BASE = 'https://github.com/appcelerator/titanium_mobile/raw/master/demos/KitchenSink/Resources/images/';
@@ -162,6 +138,38 @@ function MapWindow() {
 	}));
 	mapView.addAnnotations(points);
 	
+	
+	var ChatView = require('ui/common/ChatView');
+	var chatView = new ChatView();
+	var buttonBar = Ti.UI.createButtonBar({
+		labels: ['Friends', 'Chat'],
+		style:Titanium.UI.iPhone.SystemButtonStyle.BAR,
+		backgroundColor: '#4d2c14',
+		width: '200'
+	});
+
+	
+	buttonBar.addEventListener('click', function(e){
+		switch (e.index){
+			case 0:
+				// console.log(chatView.children[1].items.toString());
+				chatView.children[1].items[3].blur();
+				chatView.hide();
+				tableView.show();
+				mapView.show();
+			break;
+			case 1:
+				chatView.show();
+				tableView.hide();
+				mapView.hide();
+			break;
+			default:
+			break;
+		}
+	});
+	self.setRightNavButton(buttonBar);
+	
+	self.add(chatView);
 	self.add(tableView);
 	self.add(mapView);
 	
