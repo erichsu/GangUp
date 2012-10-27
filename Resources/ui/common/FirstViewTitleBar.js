@@ -9,7 +9,7 @@ exports.createCustomTitleBar = function() {
 	});
 
 	var imageUserAvatar = Ti.UI.createImageView({
-		image : IMG_BASE + 'custom_tableview/user.png',
+		image : 'https://fbcdn-profile-a.akamaihd.net/hprofile-ak-snc6/186407_100000118735875_223633739_n.jpg',
 		left : 15,
 		top : 11,
 		width : 23,
@@ -22,7 +22,7 @@ exports.createCustomTitleBar = function() {
 			fontFamily : 'Arial',
 			fontSize : defaultFontSize + 6
 		},
-		text : 'Fred Smith',
+		text : 'Roy Lee',
 		left : 45,
 		top : 6,
 		width : 200,

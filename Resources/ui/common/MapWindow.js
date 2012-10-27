@@ -1,16 +1,31 @@
 function MapWindow() {
 	var CustomTitleWindow = require('ui/common/CustomTitleWindow');
 	var self = new CustomTitleWindow({
-		title:"Map"
+		// title:"Map"
 	});
 	
-	var detailButton = Ti.UI.createButton({
-		image: 'iphone/list-view.png'
+	// var detailButton = Ti.UI.createButton({
+		// image: 'iphone/list-view.png'
+	// });
+	// detailButton.addEventListener('click', function(e){
+		// self.close();
+	// });
+	// self.setRightNavButton(detailButton);
+	
+	var buttonBar = Ti.UI.createButtonBar({
+		labels: ['Friends', 'Chat'],
+		style:Titanium.UI.iPhone.SystemButtonStyle.BAR,
+		backgroundColor: '#4d2c14',
+		width: '200'
 	});
-	detailButton.addEventListener('click', function(e){
-		self.close();
-	});
-	self.setRightNavButton(detailButton);
+	// self.setTitleControl(buttonBar);
+	self.setRightNavButton(buttonBar);
+	
+	
+	
+	// var win = Ti.UI.createWindow({
+		// ti
+	// })
 	
 	var titleControl = Ti.UI.iOS.createToolbar({
 		// items: []
@@ -26,14 +41,16 @@ function MapWindow() {
 	
 	var invitedNumber = 4;
 	var points = [];
-	
+	var nameData = ['Hanako', 'Zoe Lee', 'Akiko', 'Ann', 'Yamato'];
 	for (var i=0 ; i<=invitedNumber ; i++){
 		
+		// var rnd = Math.random() % 100 *0.005;
+		// console.log(rnd);
 		points[i] = Titanium.Map.createAnnotation({
-			latitude:50.74511 + i * 2,
-			longitude:-84.38993 - i * 2,
-			title: "friend #" + i, 
-			subtitle: "ya~", 
+			latitude: 25.082936 + Math.pow(-1, i) * Math.random() % 100 *0.005,
+			longitude: 121.557326 + Math.pow(-1, i) * Math.random() % 100 *0.005,
+			title: nameData[i], 
+			// subtitle: "ya~", 
 			pincolor:Titanium.Map.ANNOTATION_GREEN,
 			animate:true,
 			myid:i
@@ -47,7 +64,7 @@ function MapWindow() {
 	  });
 	  
 	  var imageAvatar = Ti.UI.createImageView({
-	    image: IMG_BASE + 'custom_tableview/user.png',
+	    image: 'head_' + i + '.png',//IMG_BASE + 'custom_tableview/user.png',
 	    left:10, top:5,
 	    width:50, height:50
 	  });
@@ -56,25 +73,27 @@ function MapWindow() {
 	  var labelAttendee = Ti.UI.createLabel({
 	    color:'#576996',
 	    font:{fontFamily:'Arial', fontSize:defaultFontSize+6, fontWeight:'bold'},
-	    text:'friend' + i,
+	    text:nameData[i],
 	    left:10, top: 57,
 	    width:100, height: 15
 	  });
 	  row.add(labelAttendee);
 	  
+	  var etaData = ['15', '5', '31', '18', '8'];
 	  var labelETA = Ti.UI.createLabel({
 	    color:'#222',
 	    font:{fontFamily:'Arial', fontSize:defaultFontSize + 2, fontWeight:'normal'},
-	    text:'ETA : ' + i + ' hr',
+	    text:'ETA : ' + etaData[i] + ' min',
 	    left:90, top:0,
 	    width:100, height:20
 	  });
 	  row.add(labelETA);
 	    
+	  var dstData = ['2', '0.5', '5', '2.5', '0.8'];
 	  var labelDistance = Ti.UI.createLabel({
 	    color:'#0F2D00',
 	    font:{fontFamily:'Arial', fontSize:defaultFontSize + 1, fontWeight:'normal'},
-	    text: "away from destination : " + i + ' km',
+	    text: "away from destination : " + dstData[i] + ' km',
 	    left:90, top:25,
 	    height:20
 	  });
@@ -94,10 +113,14 @@ function MapWindow() {
 	  		latitude: points[e.index].getLatitude(),
 	  		longitude:points[e.index].getLongitude(),
 	  		animate:true,
-    		latitudeDelta:0.05,
-    		longitudeDelta:0.05
-    		});	
+    		// latitudeDelta:0.01,
+    		// longitudeDelta:0.01
+    		});
+    	// points[e.index].fireEvent('click');
 	  	});
+	  	
+	  	// var annot = Ti.Map.createAnnotation();
+	  	// annot.fireEvent('click');
 
 	  	tableData.push(row);
 	}
@@ -121,15 +144,23 @@ function MapWindow() {
 
 	var mapView = Titanium.Map.createView({
 	    mapType: Titanium.Map.STANDARD_TYPE,
-	    region: {latitude:33.74511, longitude:-84.38993, 
-	            latitudeDelta:0.05, longitudeDelta:0.05},
+	    region: {latitude:25.082936, longitude:121.557326, 
+	            latitudeDelta:0.01, longitudeDelta:0.01},
 	    animate:true,
 	    regionFit:true,
 	    userLocation:true,
 	    top: tableView.getHeight()
 	});
-	
-	mapView.setAnnotations(points);
+	mapView.addAnnotation(Titanium.Map.createAnnotation({
+			latitude: 25.082936,
+			longitude: 121.557326,
+			title: "Destination", 
+			subtitle: "Miramar", 
+			pincolor:Titanium.Map.ANNOTATION_RED,
+			animate:true,
+			// myid:i
+	}));
+	mapView.addAnnotations(points);
 	
 	self.add(tableView);
 	self.add(mapView);

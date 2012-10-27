@@ -38,7 +38,7 @@ function CustomTableRow1() {
 			fontSize : 20,
 			fontWeight : 'bold'
 		},
-		text : 'Event ',
+		text : '007! Skyfall~',
 		left : 30,
 		top : 6,
 		width : 200,
@@ -54,7 +54,7 @@ function CustomTableRow1() {
 			fontSize : 11,
 			fontWeight : 'normal'
 		},
-		text : 'Hosted by \nSimon',
+		text : 'Hosted by \nSophia',
 		textAlign: Ti.UI.TEXT_ALIGNMENT_RIGHT,
 		right : 20,
 		top : 65
@@ -103,6 +103,7 @@ function CustomTableRow1() {
 		borderColor: 'white',
 		borderWidth: 4,
 		backgroundColor: 'gray',
+		image: 'http://taipeipackage.com/images/Content/6273_1.jpg',
 		left : 68,
 		top : 96,
 		width: 170,

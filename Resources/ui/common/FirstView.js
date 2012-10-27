@@ -26,7 +26,9 @@ function FirstView() {
 	var topRow = new CustomTableRow1();
 
 	var tableData = [];
-	for (var i = 1; i <= 10; i++) {
+	var nameData = ['Hanako', 'Zoe Lee', 'Akiko', 'Ann', 'Yamato'];
+	var eventData = ['Flower viewing at Ali Mountain', 'Study in Library', 'Movie watching in Beijing', 'Dating in Gothan', 'Go to beach for sunbathe']
+	for (var i = 0; i < 5; i++) {
 		var row = Ti.UI.createTableViewRow({
 			className : 'forumEvent', // used to improve table performance
 			// selectedBackgroundColor : 'white',
@@ -42,7 +44,7 @@ function FirstView() {
 		row.add(imageBackground);
 
 		var imageAvatar = Ti.UI.createImageView({
-			image : IMG_BASE + 'custom_tableview/user.png',
+			image : 'iphone/head_' + i + '.png' ,//IMG_BASE + 'custom_tableview/user.png',
 			right : 15,
 			top : 7,
 			width : 47,
@@ -59,7 +61,7 @@ function FirstView() {
 				fontSize : defaultFontSize + 6,
 				fontWeight : 'bold'
 			},
-			text : 'Event ' + i,
+			text : eventData[i],
 			left : 30,
 			top : 6,
 			width : 200,
@@ -75,7 +77,7 @@ function FirstView() {
 				fontSize : 11,
 				fontWeight : 'normal'
 			},
-			text : 'Hosted by Reed Yeh',
+			text : 'Hosted by ' + nameData[i],
 			left : 30,
 			top : 30,
 			width : 360
@@ -89,7 +91,7 @@ function FirstView() {
 				fontSize : defaultFontSize,
 				fontWeight : 'normal'
 			},
-			text : '24 Nov 2012',
+			text : i*5 + 1 + ' Nov 2012',
 			left : 30,
 			bottom : 0,
 			width : 200,
@@ -124,8 +126,10 @@ function FirstView() {
 		width : '95%'
 	});
 	tableView.addEventListener("click", function(e) {
-		var DetailWindow = require('ui/common/DetailWindow');
-		navGroup.open(new DetailWindow());
+		// var DetailWindow = require('ui/common/DetailWindow');
+		// navGroup.open(new DetailWindow());
+		var MapWindow = require('ui/common/MapWindow');
+		navGroup.open(new MapWindow());
 	});
 	first.add(tableView);
 

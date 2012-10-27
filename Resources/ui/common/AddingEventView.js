@@ -6,7 +6,7 @@ function AddingEventView() {
 	});
 	
 	var CustomTitleWindow = require('ui/common/CustomTitleWindow');
-	var winRoot = new CustomTitleWindow();
+	var winRoot = new CustomTitleWindow({title:'Add Event'});
 	
 	var navGroup = Ti.UI.iPhone.createNavigationGroup({
 		window: winRoot

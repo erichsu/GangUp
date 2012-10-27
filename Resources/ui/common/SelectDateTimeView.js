@@ -4,12 +4,14 @@ function SelecDateTimeView() {
 	var self = Ti.UI.createView();
 	
 	var rowStartTime = Ti.UI.createTableViewRow({
-		title: 'Start Time',
-		height: 44
+		title: 'Start',
+		height: 44,
+		selectionStyle:Ti.UI.iPhone.TableViewCellSelectionStyle.BLUE
 	});
 	var rowEndTime = Ti.UI.createTableViewRow({
-		title: 'End Time',
-		height: 44
+		title: 'End',
+		height: 44,
+		selectionStyle:Ti.UI.iPhone.TableViewCellSelectionStyle.BLUE
 	})
 	
 	var tableView = Ti.UI.createTableView({
@@ -23,6 +25,11 @@ function SelecDateTimeView() {
 		type: Ti.UI.PICKER_TYPE_DATE_AND_TIME,
 		top: '40%'
 	});
+	
+	datePicker.addEventListener('change',function(e){
+	
+	})
+	
 	
 	self.add(tableView);
 	self.add(datePicker);
