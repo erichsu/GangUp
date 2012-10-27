@@ -83,11 +83,28 @@ function ReadInvitationView() {
 		hasChild: true
 	});
 	
+	
+	// Create a Switch.
+	var trackLocationSwitch = Ti.UI.createSwitch({
+		value : true,
+		right : 10
+	});
+	trackLocationSwitch.addEventListener('change', function(e) {
+		Ti.API.info('Event value: ' + e.value + ', switch value: ' + trackLocationSwitch.value);
+	});
+	
+	var trackLocationRow = Ti.UI.createTableViewRow({
+		title: 'Publish Location',
+		height: 40,
+	});
+	trackLocationRow.add(trackLocationSwitch);
+	
+	
 	var tableView = Ti.UI.createTableView({
 		top: 0,
 		style: Ti.UI.iPhone.TableViewStyle.GROUPED,
 		height: '90%',
-		data: [titleRow, locationRow, datetimeRow, description]
+		data: [titleRow, locationRow, datetimeRow, description, trackLocationRow]
 	});
 	
 	// Toolbar

@@ -4,11 +4,68 @@ function ChatView(opts) {
 	
 	var rootView = Ti.UI.createView();
 	
+
+	var senderMsgLabel = Ti.UI.createLabel({
+		text: 'WTF~fjsjdlfkj',
+		right: 7,
+		backgroundImage: 'iphone/sender-box.png'
+	});
+	var senderArrow = Ti.UI.createView({
+		backgroundImage: 'iphone/sender-box-arrow.png',
+		width: 7, hedght: 26,
+		right:0, bottom: 10
+	});
+	var senderBox = Ti.UI.createView({
+		children: [senderMsgLabel, senderArrow],
+		//width: senderMsgLabel.text.length * 10 + 30,
+		right: 0
+	});
+	
+	
+	var senderRow = Ti.UI.createTableViewRow({
+		height: 40
+	});
+	senderRow.add(senderBox);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	var fromMsgLabel = Ti.UI.createLabel({
+		text: 'Ha ha ha ha ha..',
+		backgroundImage: 'iphone/from-box.png',
+		left: 14
+	});
+	var fromArrow = Ti.UI.createView({
+		backgroundImage: 'iphone/from-box-arrow.png',
+		left: 0, bottom: 10,
+		width: 14, height: 30
+	})
+	var fromBox = Ti.UI.createView({
+		children: [fromMsgLabel, fromArrow],
+		left: 50
+	});
+	var fromRow = Ti.UI.createTableViewRow({
+		leftImage: 'iphone/head_0.png',
+		height: 40
+	});
+	fromRow.add(fromBox);
+	
 	var tableView = Ti.UI.createTableView({
+		data: [senderRow, fromRow],
 		height: '90%',
+		borderColor: 'transparent',
 		top: 0
 	});
-
+	console.log(tableView.data.length);
 
 	var flexSpace = Titanium.UI.createButton({
 		systemButton:Titanium.UI.iPhone.SystemButton.FLEXIBLE_SPACE

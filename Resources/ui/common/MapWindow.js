@@ -142,13 +142,11 @@ function MapWindow() {
 	var ChatView = require('ui/common/ChatView');
 	var chatView = new ChatView();
 	var buttonBar = Ti.UI.createButtonBar({
-		labels: ['Friends', 'Chat'],
+		labels: [{image: 'iphone/group.png'}, {image: 'iphone/chat.png'}],
 		style:Titanium.UI.iPhone.SystemButtonStyle.BAR,
 		backgroundColor: '#4d2c14',
-		width: '200'
+		// width: ''
 	});
-
-	
 	buttonBar.addEventListener('click', function(e){
 		switch (e.index){
 			case 0:
@@ -167,7 +165,27 @@ function MapWindow() {
 			break;
 		}
 	});
-	self.setRightNavButton(buttonBar);
+	self.setTitleControl(buttonBar);
+	
+	// var trackButton = Ti.UI.createButton({
+		// style: Ti.UI.iPhone.SystemButtonStyle.BORDERED,
+		// {image: 'iphone/location-arrow.png'},
+		// // width: 16, height: 16
+	// });
+	// trackButton.addEventListener('click', function(e){
+	// });
+	var trackButton = Ti.UI.createButtonBar({
+		labels:[{image: 'iphone/location-arrow.png'}],
+		backgroundColor: '#4d2c14',
+		trackState: 0
+	});
+	trackButton.addEventListener('click', function(e){
+		trackButton.trackState = trackButton.trackState?0:1;
+		trackButton.backgroundColor = trackButton.trackState?'brown':'#4d2c14';
+		
+	});
+	
+	self.setRightNavButton(trackButton);
 	
 	self.add(chatView);
 	self.add(tableView);
