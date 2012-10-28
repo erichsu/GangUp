@@ -4,45 +4,40 @@ function ChatView(opts) {
 	
 	var rootView = Ti.UI.createView();
 	
-
+	// sender balloon
 	var senderMsgLabel = Ti.UI.createLabel({
-		text: 'WTF~fjsjdlfkj',
+		text: 'WTF~ Where is Reed!',
+		right: 12
+	});
+	var senderBalloon = Ti.UI.createView({
 		right: 7,
-		backgroundImage: 'iphone/sender-box.png'
+		backgroundImage: 'iphone/sender-box.png',
+		width: senderMsgLabel.toImage().width + 10,
 	});
 	var senderArrow = Ti.UI.createView({
-		backgroundImage: 'iphone/sender-box-arrow.png',
+		backgroundImage: 'iphone/sender-box-arrow.png',		
 		width: 7, hedght: 26,
 		right:0, bottom: 10
 	});
 	var senderBox = Ti.UI.createView({
-		children: [senderMsgLabel, senderArrow],
+		children: [senderBalloon, senderMsgLabel, senderArrow],
 		//width: senderMsgLabel.text.length * 10 + 30,
 		right: 0
 	});
-	
-	
 	var senderRow = Ti.UI.createTableViewRow({
-		height: 40
+		height: 40,
+		selectionStyle: Ti.UI.iPhone.TableViewCellSelectionStyle.NONE
 	});
 	senderRow.add(senderBox);
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	// From balloon
 	var fromMsgLabel = Ti.UI.createLabel({
 		text: 'Ha ha ha ha ha..',
+		left: 19
+	});
+	var fromBalloon = Ti.UI.createView({
 		backgroundImage: 'iphone/from-box.png',
-		left: 14
+		left: 14, width: fromMsgLabel.toImage().width + 10,
 	});
 	var fromArrow = Ti.UI.createView({
 		backgroundImage: 'iphone/from-box-arrow.png',
@@ -50,22 +45,22 @@ function ChatView(opts) {
 		width: 14, height: 30
 	})
 	var fromBox = Ti.UI.createView({
-		children: [fromMsgLabel, fromArrow],
+		children: [fromBalloon, fromMsgLabel, fromArrow],
 		left: 50
 	});
 	var fromRow = Ti.UI.createTableViewRow({
 		leftImage: 'iphone/head_0.png',
+		selectionStyle: Ti.UI.iPhone.TableViewCellSelectionStyle.NONE,
 		height: 40
 	});
 	fromRow.add(fromBox);
 	
 	var tableView = Ti.UI.createTableView({
 		data: [senderRow, fromRow],
-		height: '90%',
-		borderColor: 'transparent',
+		height: 371,
+		separatorStyle: Ti.UI.iPhone.TableViewSeparatorStyle.NONE,
 		top: 0
 	});
-	console.log(tableView.data.length);
 
 	var flexSpace = Titanium.UI.createButton({
 		systemButton:Titanium.UI.iPhone.SystemButton.FLEXIBLE_SPACE
@@ -82,12 +77,11 @@ function ChatView(opts) {
 	});
 	tf.addEventListener('focus', function(e){
 		toolBar.animate({bottom: 216});
-		
-		tableView.height = '90% - 216'
+		tableView.height = 155;
 	});
 	tf.addEventListener('blur', function(e){
 		toolBar.animate({bottom: 0});
-		tableView.height = '90%';
+		tableView.height = 371;
 	});
 	
 	var camera = Titanium.UI.createButton({
@@ -108,7 +102,35 @@ function ChatView(opts) {
 	});
 	send.addEventListener('click', function()
 	{
-		Titanium.UI.createAlertDialog({title:'Toolbar',message:'You clicked send!'}).show();
+		// Titanium.UI.createAlertDialog({title:'Toolbar',message:'You clicked send!'}).show();
+		if (tf.value != '') {
+			// sender balloon
+			var senderMsgLabel = Ti.UI.createLabel({
+				text: tf.value,
+				right: 12
+			});
+			var senderBalloon = Ti.UI.createView({
+				right: 7,
+				backgroundImage: 'iphone/sender-box.png',
+				width: senderMsgLabel.toImage().width + 10,
+			});
+			var senderArrow = Ti.UI.createView({
+				backgroundImage: 'iphone/sender-box-arrow.png',		
+				width: 7, hedght: 26,
+				right:0, bottom: 10
+			});
+			var senderBox = Ti.UI.createView({
+				children: [senderBalloon, senderMsgLabel, senderArrow],
+				right: 0
+			});
+			var senderRow = Ti.UI.createTableViewRow({
+				height: 40
+			});
+			senderRow.add(senderBox);
+			tableView.appendRow(senderRow);
+			tableView.scrollToIndex(tableView.data[0].rowCount - 1);
+			tf.value = '';
+		}
 	});
 	
 	var toolBar = Ti.UI.iOS.createToolbar({
