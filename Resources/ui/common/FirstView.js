@@ -29,89 +29,8 @@ function FirstView() {
 	var CustomTableRow1 = require('ui/common/CustomTableRow1');
 	var topRow = new CustomTableRow1();
 
-	var tableData = [];
-	var nameData = ['Hanako', 'Zoe Lee', 'Akiko', 'Ann', 'Yamato'];
-	var eventData = ['Flower viewing at Ali Mountain', 'Study in Library', 'Movie watching in Beijing', 'Dating in Gothan', 'Go to beach for sunbathe']
-	for (var i = 0; i < 5; i++) {
-		var row = Ti.UI.createTableViewRow({
-			className : 'forumEvent', // used to improve table performance
-			// selectedBackgroundColor : 'white',
-			rowIndex : i, // custom property, useful for determining the row during events
-			height : 60
-		});
-		
-		var imageBackground = Ti.UI.createView({
-			backgroundImage: 'iphone/notePaperRow.png',
-			left: 0,
-			height: 60
-		});
-		row.add(imageBackground);
-
-		var imageAvatar = Ti.UI.createImageView({
-			image : 'iphone/head_' + i + '.png' ,//IMG_BASE + 'custom_tableview/user.png',
-			right : 15,
-			top : 7,
-			width : 47,
-			height : 47,
-			borderWidth: 4,
-			borderColor: 'white'
-		});
-		row.add(imageAvatar);
-
-		var labelEventName = Ti.UI.createLabel({
-			color : '#576996',
-			font : {
-				fontFamily : 'Arial',
-				fontSize : defaultFontSize + 6,
-				fontWeight : 'bold'
-			},
-			text : eventData[i],
-			left : 30,
-			top : 6,
-			width : 200,
-			height : 30,
-
-		});
-		row.add(labelEventName);
-
-		var labelHost = Ti.UI.createLabel({
-			color : '#222',
-			font : {
-				fontFamily : 'Arial',
-				fontSize : 11,
-				fontWeight : 'normal'
-			},
-			text : 'Hosted by ' + nameData[i],
-			left : 30,
-			top : 30,
-			width : 360
-		});
-		row.add(labelHost);
-
-		var labelDate = Ti.UI.createLabel({
-			color : '#999',
-			font : {
-				fontFamily : 'Arial',
-				fontSize : defaultFontSize,
-				fontWeight : 'normal'
-			},
-			text : i*5 + 1 + ' Nov 2012',
-			left : 30,
-			bottom : 0,
-			width : 200,
-			height : 20
-		});
-		row.add(labelDate);
-
-		tableData.push(row);
-	}
-
 	var firstSection = Ti.UI.createTableViewSection({
 		rows : [topRow]
-	});
-	
-	var secondSection = Ti.UI.createTableViewSection({
-		rows : tableData
 	});
 	
 	var lastSection = Ti.UI.createTableViewSection({
@@ -131,8 +50,6 @@ function FirstView() {
 		width : '95%'
 	});
 	tableView.addEventListener("click", function(e) {
-		// var DetailWindow = require('ui/common/DetailWindow');
-		// navGroup.open(new DetailWindow());
 		var MapWindow = require('ui/common/MapWindow');
 		navGroup.open(new MapWindow());
 	});
@@ -146,6 +63,108 @@ function FirstView() {
 		left : '5%',
 		image : 'iphone/refresh.png',
 		backgroundSelectedColor: 'white'
+	});
+	refresh.addEventListener('click', function(){
+		var eventList = 'SELECT name, pic, start_time, end_time, location, description, creator ' +
+ 						'FROM event WHERE eid IN ( SELECT eid FROM event_member WHERE uid = me() )' + 
+ 						'ORDER BY start_time asc';
+		var creatorList = 'SELECT name, pic FROM user WHERE uid IN (SELECT creator FROM #eventList)';
+		Titanium.Facebook.request('fql.multiquery', {queries: {eventList: eventList, creatorList: creatorList}}, function(e) {
+		// Ti.Facebook.requestWithGraphPath('me/events', {fields:'name,location,rsvp_status,start_time,owner'}, 'GET', function(e) {
+			if (!e.success) {
+				if (e.error) {
+					alert(e.error);
+				} else {
+					alert("call was unsuccessful");
+				}
+				return;
+			}
+			var secondSection = Ti.UI.createTableViewSection();
+			
+			// console.log(JSON.parse(e.result));
+			events = JSON.parse(e.result)[0]['fql_result_set'];
+			creators = JSON.parse(e.result)[1]['fql_result_set'];
+			for(var key in events) {
+				console.log(key);
+				console.log(events[key]);
+				console.log(creators[key]);
+				// console.log(JSON.parse(e.result).data[key].owner.name);
+				// console.log(JSON.parse(e.result).data[key].name);
+				// console.log(JSON.parse(e.result).data[key].start_time);
+
+				var row = Ti.UI.createTableViewRow({
+					className : 'forumEvent',
+					rowIndex : key,
+					height : 60
+				});
+				
+				var imageBackground = Ti.UI.createView({
+					backgroundImage: 'iphone/notePaperRow.png',
+					left: 0,
+					height: 60
+				});
+				row.add(imageBackground);
+		
+				var imageAvatar = Ti.UI.createImageView({
+					image : creators[key]?creators[key].pic:null,//'iphone/head_' + i + '.png' ,//IMG_BASE + 'custom_tableview/user.png',
+					right : 15,
+					top : 7,
+					width : 47,
+					height : 47,
+					borderWidth: 4,
+					borderColor: 'white'
+				});
+				row.add(imageAvatar);
+		
+				var labelEventName = Ti.UI.createLabel({
+					color : '#576996',
+					font : {
+						fontFamily : 'Arial',
+						fontSize : defaultFontSize + 6,
+						fontWeight : 'bold'
+					},
+					text : events[key].name,
+					left : 30,
+					top : 6,
+					width : 200,
+					height : 30,
+		
+				});
+				row.add(labelEventName);
+		
+				var labelHost = Ti.UI.createLabel({
+					color : '#222',
+					font : {
+						fontFamily : 'Arial',
+						fontSize : 11,
+						fontWeight : 'normal'
+					},
+					text : 'Hosted by ' + creators[key]?creators[key].name: null,
+					left : 30,
+					top : 30,
+					width : 360
+				});
+				row.add(labelHost);
+		
+				var labelDate = Ti.UI.createLabel({
+					color : '#999',
+					font : {
+						fontFamily : 'Arial',
+						fontSize : defaultFontSize,
+						fontWeight : 'normal'
+					},
+					text : events[key].start_time,
+					left : 30,
+					bottom : 0,
+					width : 200,
+					height : 20
+				});
+				row.add(labelDate);
+				secondSection.add(row);
+			}
+			tableView.setData([firstSection, secondSection, lastSection]);
+		});
+		
 	});
 
 	var add = Ti.UI.createButton({
@@ -174,6 +193,11 @@ function FirstView() {
 		right : '5%',
 		image : 'iphone/gear.png',
 		backgroundSelectedColor: 'white'
+	});
+	info.addEventListener('click', function(e){
+		var Settings = require('ui/common/util/Settings'),
+			win = new Settings({modal: true, backgroundColor: '#fff'});
+		win.open();
 	});
 	
 
