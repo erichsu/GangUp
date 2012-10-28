@@ -4,63 +4,31 @@ function ChatView(opts) {
 	
 	var rootView = Ti.UI.createView();
 	
-	// sender balloon
-	var senderMsgLabel = Ti.UI.createLabel({
-		text: 'WTF~ Where is Reed!',
-		right: 12
-	});
-	var senderBalloon = Ti.UI.createView({
-		right: 7,
-		backgroundImage: 'iphone/sender-box.png',
-		width: senderMsgLabel.toImage().width + 10,
-	});
-	var senderArrow = Ti.UI.createView({
-		backgroundImage: 'iphone/sender-box-arrow.png',		
-		width: 7, hedght: 26,
-		right:0, bottom: 10
-	});
-	var senderBox = Ti.UI.createView({
-		children: [senderBalloon, senderMsgLabel, senderArrow],
-		//width: senderMsgLabel.text.length * 10 + 30,
-		right: 0
-	});
-	var senderRow = Ti.UI.createTableViewRow({
-		height: 40,
-		selectionStyle: Ti.UI.iPhone.TableViewCellSelectionStyle.NONE
-	});
-	senderRow.add(senderBox);
-	
-	// From balloon
-	var fromMsgLabel = Ti.UI.createLabel({
-		text: 'Ha ha ha ha ha..',
-		left: 19
-	});
-	var fromBalloon = Ti.UI.createView({
-		backgroundImage: 'iphone/from-box.png',
-		left: 14, width: fromMsgLabel.toImage().width + 10,
-	});
-	var fromArrow = Ti.UI.createView({
-		backgroundImage: 'iphone/from-box-arrow.png',
-		left: 0, bottom: 10,
-		width: 14, height: 30
-	})
-	var fromBox = Ti.UI.createView({
-		children: [fromBalloon, fromMsgLabel, fromArrow],
-		left: 50
-	});
-	var fromRow = Ti.UI.createTableViewRow({
-		leftImage: 'iphone/head_0.png',
-		selectionStyle: Ti.UI.iPhone.TableViewCellSelectionStyle.NONE,
-		height: 40
-	});
-	fromRow.add(fromBox);
+	var msgData = [
+		{msg: 'God, where is Reed~'},
+		{msg:'XD', img:'iphone/head_1.jpg'},
+		{msg:'Reed is always late', img:'iphone/head_2.jpg'},
+		{msg:'Easy easy~ Roy!', img:'iphone/head_1.jpg'},
+		{msg:'Sorry~', img:'iphone/head_3.jpg'},
+	];
 	
 	var tableView = Ti.UI.createTableView({
-		data: [senderRow, fromRow],
 		height: 371,
 		separatorStyle: Ti.UI.iPhone.TableViewSeparatorStyle.NONE,
 		top: 0
 	});
+	
+	for (i=0; i< msgData.length; i++) {
+		if (msgData[i].img != undefined) {
+			tableView.appendRow(
+				require('ui/common/FromMsgBox').createFromMsgBox(msgData[i].msg, msgData[i].img)
+			);
+		} else {
+			tableView.appendRow(
+				require('ui/common/SendMsgBox').createSendMsgBox(msgData[i].msg)
+			);
+		}
+	}
 
 	var flexSpace = Titanium.UI.createButton({
 		systemButton:Titanium.UI.iPhone.SystemButton.FLEXIBLE_SPACE

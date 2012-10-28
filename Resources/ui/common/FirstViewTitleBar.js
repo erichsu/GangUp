@@ -9,7 +9,7 @@ exports.createCustomTitleBar = function() {
 	});
 
 	var imageUserAvatar = Ti.UI.createImageView({
-		image : 'https://fbcdn-profile-a.akamaihd.net/hprofile-ak-snc6/186407_100000118735875_223633739_n.jpg',
+		image : 'iphone/head_0.jpg',//'https://fbcdn-profile-a.akamaihd.net/hprofile-ak-prn1/174304_1194226359_6065833_n.jpg',//'https://fbcdn-profile-a.akamaihd.net/hprofile-ak-snc6/186407_100000118735875_223633739_n.jpg',
 		left : 15,
 		top : 11,
 		width : 23,
@@ -38,7 +38,7 @@ exports.createCustomTitleBar = function() {
 	});
 
 	var badge = Ti.UI.createLabel({
-		text : "3",
+		text : "1",
 		textAlign : "center",
 		height : 16,
 		width : 16,
@@ -54,7 +54,7 @@ exports.createCustomTitleBar = function() {
 		top : 1,
 		left : 2
 	});
-	notification.add(badge);
+	// notification.add(badge);
 	notification.addEventListener('click', function(e) {
 		var winNotify = Ti.UI.createWindow({
 			bottom : 436
@@ -62,7 +62,7 @@ exports.createCustomTitleBar = function() {
 
 		var NotificationView = require('ui/common/NotificationView');
 		winNotify.add(new NotificationView(Ti.UI.createImageView({
-			image : IMG_BASE + 'custom_tableview/user.png',
+			image : 'https://fbcdn-profile-a.akamaihd.net/hprofile-ak-prn1/174304_1194226359_6065833_n.jpg',//IMG_BASE + 'custom_tableview/user.png',
 			left : 0,
 			top : 11,
 			width : 23,
@@ -73,7 +73,7 @@ exports.createCustomTitleBar = function() {
 				fontFamily : 'Arial',
 				fontSize : defaultFontSize + 6
 			},
-			text : 'Fred Smith',
+			text : 'Reed Yeh',
 			left : 30,
 			top : 6,
 			width : 200,

@@ -23,9 +23,9 @@ function NotificationView(imageUserAvatar, labelUserName) {
 		top: 0,
 		height: '90%',
 		data: [Ti.UI.createTableViewRow({
-			title: '007! Skyfall~', rightImage: 'iphone/host_small.jpg'
+			title: '007! Skyfall~', rightImage: 'iphone/roy_small.jpg'
 		})]
-	});
+	});//'iphone/host_small.jpg'
 	tableView.addEventListener('click', function(e){
 		var CustomTitleWindow = require('ui/common/CustomTitleWindow');
 		var win = new CustomTitleWindow();

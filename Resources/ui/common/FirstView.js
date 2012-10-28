@@ -1,5 +1,9 @@
 function FirstView() {
 	//create object instance, a parasitic subclass of Observable
+	
+	// Ti.UI.createAlertDialog({title: '007! Skyfall~',message: 'In 30 mins:\nMiramar', buttonNames:['Cancel', 'GangUp']}).show();
+	// return Ti.UI.createImageView({image: 'desktop.png'});
+	
 	var self = Ti.UI.createView();
 	var height = Ti.Platform.displayCaps.platformHeight, width = Ti.Platform.displayCaps.platformWidth;
 	//label using localization-ready strings from <app dir>/i18n/en/strings.xml
@@ -119,7 +123,8 @@ function FirstView() {
 
 	var tableView = Ti.UI.createTableView({
 		backgroundColor : 'transparent',
-		data : [firstSection, secondSection, lastSection],
+		// data : [firstSection, secondSection, lastSection],
+		data : [firstSection],
 		separatorColor : 'transparent',
 		top : 54,
 		height : '79%',
@@ -132,6 +137,7 @@ function FirstView() {
 		navGroup.open(new MapWindow());
 	});
 	first.add(tableView);
+	// first.add(Ti.UI.createLabel({text:'There\'re no events now.\nCreate a new event,\nand invite your friends.'}));
 
 	var refresh = Titanium.UI.createButton({
 		style : Ti.UI.iPhone.SystemButtonStyle.PLAIN,

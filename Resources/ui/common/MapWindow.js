@@ -15,16 +15,22 @@ function MapWindow() {
 	  return Math.floor(Math.random() * max) + 1;
 	}
 	
-	var invitedNumber = 4;
+	var invitedNumber = 3;
 	var points = [];
-	var nameData = ['Hanako', 'Zoe Lee', 'Akiko', 'Ann', 'Yamato'];
+	var nameData = ['Roy', 'Charles', 'Eric', 'Reed'];
+	var etaData = ['0', '3', '5', '30'];
+	var dstData = ['0', '0.5', '1', '6'];
+	var latData = [0.0005, 0.0027, -0.0062, -0.0472];
+	var longData = [0.0002, -0.0036, -0.0054, 0.0305];
 	for (var i=0 ; i<=invitedNumber ; i++){
 		
 		// var rnd = Math.random() % 100 *0.005;
 		// console.log(rnd);
 		points[i] = Titanium.Map.createAnnotation({
-			latitude: 25.082936 + Math.pow(-1, i) * Math.random() % 100 *0.005,
-			longitude: 121.557326 + Math.pow(-1, i) * Math.random() % 100 *0.005,
+			// latitude: 25.082936 + Math.pow(-1, i) * Math.random() % 100 *0.005,
+			// longitude: 121.557326 + Math.pow(-1, i) * Math.random() % 100 *0.005,
+			latitude: 25.082936 + latData[i],
+			longitude: 121.557326 + longData[i],
 			title: nameData[i], 
 			// subtitle: "ya~", 
 			pincolor:Titanium.Map.ANNOTATION_GREEN,
@@ -40,7 +46,7 @@ function MapWindow() {
 	  });
 	  
 	  var imageAvatar = Ti.UI.createImageView({
-	    image: 'head_' + i + '.png',//IMG_BASE + 'custom_tableview/user.png',
+	    image: 'head_' + i + '.jpg',//IMG_BASE + 'custom_tableview/user.png',
 	    left:10, top:5,
 	    width:50, height:50
 	  });
@@ -55,7 +61,7 @@ function MapWindow() {
 	  });
 	  row.add(labelAttendee);
 	  
-	  var etaData = ['15', '5', '31', '18', '8'];
+	  
 	  var labelETA = Ti.UI.createLabel({
 	    color:'#222',
 	    font:{fontFamily:'Arial', fontSize:defaultFontSize + 2, fontWeight:'normal'},
@@ -65,7 +71,7 @@ function MapWindow() {
 	  });
 	  row.add(labelETA);
 	    
-	  var dstData = ['2', '0.5', '5', '2.5', '0.8'];
+	  
 	  var labelDistance = Ti.UI.createLabel({
 	    color:'#0F2D00',
 	    font:{fontFamily:'Arial', fontSize:defaultFontSize + 1, fontWeight:'normal'},
@@ -121,7 +127,7 @@ function MapWindow() {
 	var mapView = Titanium.Map.createView({
 	    mapType: Titanium.Map.STANDARD_TYPE,
 	    region: {latitude:25.082936, longitude:121.557326, 
-	            latitudeDelta:0.01, longitudeDelta:0.01},
+	            latitudeDelta:0.005, longitudeDelta:0.005},
 	    animate:true,
 	    regionFit:true,
 	    userLocation:true,
